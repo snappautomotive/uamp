@@ -58,13 +58,13 @@ class AutomotiveMusicService : MusicService() {
     override fun onCreate() {
         super.onCreate()
 
-        // Register to handle login/logout commands.
+        /*// Register to handle login/logout commands.
         mediaSessionConnector.registerCustomCommandReceiver(AutomotiveCommandReceiver())
 
         // Require the user to be logged in for demonstration purposes.
         if (!isAuthenticated()) {
             requireLogin()
-        }
+        }*/
     }
 
     private fun onLogin(email: String, password: String): Boolean {
