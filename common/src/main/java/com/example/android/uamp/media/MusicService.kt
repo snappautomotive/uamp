@@ -45,8 +45,6 @@ import com.example.android.uamp.media.library.BrowseTree
 import com.example.android.uamp.media.library.JsonSource
 import com.example.android.uamp.media.library.MEDIA_SEARCH_SUPPORTED
 import com.example.android.uamp.media.library.MusicSource
-import com.example.android.uamp.media.library.STATE_CREATED
-import com.example.android.uamp.media.library.STATE_INITIALIZING
 import com.example.android.uamp.media.library.UAMP_BROWSABLE_ROOT
 import com.example.android.uamp.media.library.UAMP_EMPTY_ROOT
 import com.example.android.uamp.media.library.UAMP_RECENT_ROOT
@@ -208,6 +206,9 @@ open class MusicService : MediaBrowserServiceCompat() {
         // The media library is built from a remote JSON file. We'll create the source here,
         // and then use a suspend function to perform the download off the main thread.
         mediaSource = JsonSource(source = remoteJsonSource)
+        serviceScope.launch {
+            mediaSource.load()
+        }
 
         // ExoPlayer will manage the MediaSession for us.
         mediaSessionConnector = MediaSessionConnector(mediaSession)
@@ -322,12 +323,6 @@ open class MusicService : MediaBrowserServiceCompat() {
         if (parentMediaId == UAMP_RECENT_ROOT) {
             result.sendResult(storage.loadRecentSong()?.let { song -> listOf(song) })
         } else {
-            val abstractMusicSource = mediaSource as AbstractMusicSource
-            if(abstractMusicSource.state == STATE_INITIALIZING) {
-                serviceScope.launch {
-                    mediaSource.load()
-                }
-            }
             // If the media source is ready, the results will be set synchronously here.
             val resultsSent = mediaSource.whenReady { successfullyInitialized ->
                 if (successfullyInitialized) {
