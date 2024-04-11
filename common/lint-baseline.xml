@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 8.3.1" type="baseline" client="gradle" dependencies="false" name="AGP (8.3.1)" variant="all" version="8.3.1">
+
+    <issue
+        id="MissingSuperCall"
+        message="Overriding method should call `super.onDestroy`"
+        errorLine1="    override fun onDestroy() {"
+        errorLine2="                 ~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/android/uamp/media/MusicService.kt"
+            line="248"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `toLowerCase(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`."
+        errorLine1="            val signature = parser.nextText().replace(WHITESPACE_REGEX, &quot;&quot;).toLowerCase()"
+        errorLine2="                                                                            ~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/android/uamp/media/PackageValidator.kt"
+            line="287"
+            column="77"/>
+    </issue>
+
+    <issue
+        id="AppCompatResource"
+        message="Should use `android:actionProviderClass` when not using the appcompat library"
+        errorLine1="        app:actionProviderClass=&quot;androidx.mediarouter.app.MediaRouteActionProvider&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/menu/main_activity_menu.xml"
+            line="22"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="AppCompatResource"
+        message="Should use `android:showAsAction` when not using the appcompat library"
+        errorLine1="        app:showAsAction=&quot;always&quot; />"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/menu/main_activity_menu.xml"
+            line="23"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of org.jetbrains.kotlinx:kotlinx-coroutines-android than 1.7.2 is available: 1.8.0"
+        errorLine1="    api &quot;org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="53"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.google.android.exoplayer:exoplayer-core than 2.16.0 is available: 2.19.1"
+        errorLine1="        api &quot;com.google.android.exoplayer:exoplayer-core:$exoplayer_version&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="71"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.google.android.exoplayer:exoplayer-ui than 2.16.0 is available: 2.19.1"
+        errorLine1="        api &quot;com.google.android.exoplayer:exoplayer-ui:$exoplayer_version&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="72"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.google.android.exoplayer:extension-mediasession than 2.16.0 is available: 2.19.1"
+        errorLine1="        api &quot;com.google.android.exoplayer:extension-mediasession:$exoplayer_version&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="73"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.google.android.exoplayer:extension-cast than 2.16.0 is available: 2.19.1"
+        errorLine1="        api &quot;com.google.android.exoplayer:extension-cast:$exoplayer_version&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="74"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="VisibleForTests"
+        message="This method should only be accessed from tests or within private scope"
+        errorLine1="        return MediaQueueItem.Builder(mediaInfo.build()).build()"
+        errorLine2="                              ~~~~~~~">
+        <location
+            file="src/main/java/com/example/android/uamp/media/CastMediaItemConverter.kt"
+            line="71"
+            column="31"/>
+    </issue>
+
+    <issue
+        id="VisibleForTests"
+        message="This method should only be accessed from tests or within private scope"
+        errorLine1="        return MediaQueueItem.Builder(mediaInfo.build()).build()"
+        errorLine2="                                                         ~~~~~">
+        <location
+            file="src/main/java/com/example/android/uamp/media/CastMediaItemConverter.kt"
+            line="71"
+            column="58"/>
+    </issue>
+
+    <issue
+        id="ExportedContentProvider"
+        message="Exported content providers can provide access to potentially sensitive data"
+        errorLine1="        &lt;provider"
+        errorLine2="         ~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="40"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="UnspecifiedImmutableFlag"
+        message="Missing `PendingIntent` mutability flag"
+        errorLine1="                PendingIntent.getActivity(this, 0, sessionIntent, 0)"
+        errorLine2="                                                                  ~">
+        <location
+            file="src/main/java/com/example/android/uamp/media/MusicService.kt"
+            line="176"
+            column="67"/>
+    </issue>
+
+    <issue
+        id="StaticFieldLeak"
+        message="Do not place Android context classes in static fields (static reference to `PersistentStorage` which has field `context` pointing to `Context`); this is a memory leak"
+        errorLine1="        @Volatile"
+        errorLine2="        ^">
+        <location
+            file="src/main/java/com/example/android/uamp/media/PersistentStorage.kt"
+            line="43"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="KaptUsageInsteadOfKsp"
+        message="This library supports using KSP instead of kapt, which greatly improves performance. Learn more: https://developer.android.com/studio/build/migrate-to-ksp"
+        errorLine1="    kapt &quot;com.github.bumptech.glide:compiler:$glide_version&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="79"
+            column="5"/>
+    </issue>
+
+</issues>

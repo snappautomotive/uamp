@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
          * the initial list of media items.
          */
         viewModel.rootMediaId.observe(this,
-            Observer<String> { rootMediaId ->
+            Observer<String?> { rootMediaId ->
                 rootMediaId?.let { navigateToMediaItem(it) }
             })
 

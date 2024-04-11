@@ -38,8 +38,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
             .get(SettingsFragmentViewModel::class.java)
     }
 
-    override fun onPreferenceTreeClick(preference: Preference?): Boolean {
-        return when (preference?.key) {
+    override fun onPreferenceTreeClick(preference: Preference): Boolean {
+        return when (preference.key) {
             "logout" -> {
                 viewModel.logout()
                 requireActivity().finish()
