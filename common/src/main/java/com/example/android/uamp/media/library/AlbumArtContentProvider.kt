@@ -22,7 +22,9 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
 import android.os.ParcelFileDescriptor
+import android.util.Log
 import com.bumptech.glide.Glide
+import com.example.android.uamp.media.R
 import java.io.File
 import java.io.FileNotFoundException
 import java.util.concurrent.TimeUnit
@@ -55,20 +57,30 @@ internal class AlbumArtContentProvider : ContentProvider() {
 
         var file = File(context.cacheDir, uri.path)
 
-        if (!file.exists()) {
-            // Use Glide to download the album art.
-            val cacheFile = Glide.with(context)
-                .asFile()
-                .load(remoteUri)
-                .submit()
-                .get(DOWNLOAD_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+        return try {
+            if (!file.exists()) {
+                // Use Glide to download the album art.
+                val cacheFile = Glide.with(context)
+                    .downloadOnly()
+                    .load(remoteUri)
+                    .submit()
+                    .get(DOWNLOAD_TIMEOUT_SECONDS, TimeUnit.SECONDS)
 
-            // Rename the file Glide created to match our own scheme.
-            cacheFile.renameTo(file)
+                // Rename the file Glide created to match our own scheme.
+                cacheFile.renameTo(file)
 
-            file = cacheFile
+                file = cacheFile
+            }
+            ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY)
+        } catch (e: Exception) {
+            val defaultFile =
+                Glide.with(context)
+                    .downloadOnly()
+                    .load(R.drawable.cinematic)
+                    .submit()
+                    .get(DOWNLOAD_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            ParcelFileDescriptor.open(defaultFile, ParcelFileDescriptor.MODE_READ_ONLY)
         }
-        return ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY)
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? = null
